@@ -34,5 +34,5 @@ Validation errors on form
 1. `php artisan key:generate`
 1. `php artisan serve` or use Laravel Valet or Laravel Homestead
 ## Testing
-1. For runing test `php artisan test`
+1. For running test `php artisan test`
  
