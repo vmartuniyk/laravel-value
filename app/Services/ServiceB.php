@@ -8,7 +8,7 @@ class ServiceB implements FormulaInterface
     {
         $sum = sqrt($value_c) * sqrt($value_a);
 
-        $result = pow( $sum * $value_a,$value_a);
+        $result = pow($sum * $value_a, $value_a);
         $result = gmp_strval($result);
 
         return round($result, 1);

@@ -12,6 +12,6 @@ class Value extends Model
     protected $fillable = [
         'high',
         'middle',
-        'low'
+        'low',
     ];
 }

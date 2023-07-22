@@ -12,34 +12,31 @@ use Illuminate\Support\Facades\Redirect;
 
 class DashboardController extends Controller
 {
-
     public function __construct(
         ServiceA $serviceA,
         ServiceB $serviceB,
         ServiceC $serviceC,
-    )
-    {}
+    ) {
+    }
 
     /**
      * Handle the incoming request.
-     *
-     * @param  DashboardFormRequest  $request
-     * @return \Illuminate\Http\Response
      */
     public function __invoke(DashboardFormRequest $request): RedirectResponse
     {
         $data = $request->validated();
 
-        $test1 = ServiceA::calculateFormula($data['value_a'],$data['value_b'],$data['value_c']);
-        $test2 = ServiceB::calculateFormula($data['value_a'],$data['value_b'],$data['value_c']);
-        $test3 = ServiceC::calculateFormula($data['value_a'],$data['value_b'],$data['value_c']);
+        $result_a = ServiceA::calculateFormula($data['value_a'], $data['value_b'], $data['value_c']);
+        $result_b = ServiceB::calculateFormula($data['value_a'], $data['value_b'], $data['value_c']);
+        $result_c = ServiceC::calculateFormula($data['value_a'], $data['value_b'], $data['value_c']);
         $digits = [];
-        array_push($digits, $test1,$test2,$test3);
+        array_push($digits, $result_a, $result_b, $result_c);
         Value::create([
             'high' => max($digits),
             'middle' => array_sum($digits) / count($digits),
-            'low' => min($digits)
+            'low' => min($digits),
         ]);
+
         return Redirect::route('dashboard')->with('status', 'form-updated');
     }
 }
